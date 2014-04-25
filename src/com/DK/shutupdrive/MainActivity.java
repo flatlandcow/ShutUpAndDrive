@@ -9,15 +9,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+//import android.view.Menu;
+//import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity implements LocationListener{
-
+//Author - Kyle Corry
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,35 +30,26 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		this.onLocationChanged(null);
-		//TextView speedStatus = (TextView) findViewById(R.id.speed);
-		//ImageView textImg = (ImageView) findViewById(R.id.ivImage);
-		if(speedMPH > 10 && speedMPH < 100){
-			silent();
-			//speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting disabled.");
-			//textImg.setImageResource(R.drawable.text_off);
-		} else{
-			normal();
-			//speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting enabled.");
-			//textImg.setImageResource(R.drawable.text_on);
-		}
 	}
 	public float speed;
 	public double speedMPH;
-	//SilentToNomal and NormalToSilent device Programatically
+	
+	//SilentToNomal and NormalToSilent device
 	 public void silent(){
 		 final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-		//Silent Mode Programatically
+		//Silent Mode
 		mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 	 }
 	
 	 public void normal(){
 		 final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-			//Silent Mode Programatically
-		//Normal Mode Programatically
+		//Normal Mode
 		  mode.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
 	 }
 	
-	@Override
+	/*
+	 //this is for an options menu, I might add this in the future
+	 * @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -76,7 +67,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -94,16 +85,25 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			return rootView;
 		}
 	}
-	public void MPH(float speed){
-		speedMPH = speed * 2.23694;
-	}
 	@Override
 	public void onLocationChanged(Location location) {
+		TextView speedStatus = (TextView) this.findViewById(R.id.speed);
+		ImageView textImg = (ImageView) this.findViewById(R.id.ivImage);
 		if( location == null){
 			speed = 0;
 		} else{
 			speed = location.getSpeed();
-			MPH(speed);
+			System.out.println(speed);
+			speed *= 2.23694;
+			if(speed > 10 && speed < 100){
+				silent();
+				speedStatus.setText("Your current speed is: " + String.format("%.1g%n", speed) + " mph, texting disabled.");
+				textImg.setImageResource(R.drawable.text_off);
+			} else{
+				normal();
+				speedStatus.setText("Your current speed is: " + String.format("%.1g%n", speed) + " mph, texting enabled.");
+				textImg.setImageResource(R.drawable.text_on);
+			}
 		}
 	}
 	@Override
