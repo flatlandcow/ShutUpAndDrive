@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-//import android.view.Menu;
-//import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+//import android.view.Menu;
+//import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity implements LocationListener{
 //Author - Kyle Corry
@@ -26,7 +27,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		
+		Toast.makeText(getApplicationContext(), "Make sure to plug your phone in before driving! ... And don't text!", Toast.LENGTH_LONG).show();
 		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		this.onLocationChanged(null);
@@ -95,13 +96,14 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			speed = location.getSpeed();
 			System.out.println(speed);
 			speed *= 2.23694;
+			speed = Math.round(speed);
 			if(speed > 10 && speed < 100){
 				silent();
-				speedStatus.setText("Your current speed is: " + String.format("%.1g%n", speed) + " mph, texting disabled.");
+				speedStatus.setText("Your current speed is: " + speed + " mph, texting disabled.");
 				textImg.setImageResource(R.drawable.text_off);
 			} else{
 				normal();
-				speedStatus.setText("Your current speed is: " + String.format("%.1g%n", speed) + " mph, texting enabled.");
+				speedStatus.setText("Your current speed is: " + speed + " mph, texting enabled.");
 				textImg.setImageResource(R.drawable.text_on);
 			}
 		}
