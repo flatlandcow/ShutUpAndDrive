@@ -4,7 +4,6 @@
     <string name="app_name">Shut Up &amp; Drive!</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="remember">Remember, don't text and drive.</string>
+    <string name="remember">Remember, don\'t text and drive.</string>
     <string name="text_on">text_on</string>
-
 </resources>

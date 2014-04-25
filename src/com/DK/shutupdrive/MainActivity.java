@@ -22,6 +22,7 @@ public class MainActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		Speed.speed();
 		silent();
 	}
 	//SilentToNomal and NormalToSilent device Programatically
