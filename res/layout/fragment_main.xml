@@ -27,4 +27,15 @@
         android:layout_marginTop="80dp"
         android:src="@drawable/text_on" 
         android:contentDescription="@string/text_on"/>
+
+    <TextView
+        android:id="@+id/speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:textAlignment="center"
+        android:text="@string/speed" />
+
 </RelativeLayout>

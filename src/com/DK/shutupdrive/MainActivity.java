@@ -1,6 +1,7 @@
 package com.DK.shutupdrive;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity implements LocationListener{
 
@@ -31,13 +34,19 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		this.onLocationChanged(null);
 		MPH(speed);
 		if(speedMPH > 10 || speedMPH < 100){
-		silent();
+			silent();
+			speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting disabled.");
+			textImg.setImageResource(R.drawable.text_off);
 		} else{
 			normal();
+			speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting enabled.");
+			textImg.setImageResource(R.drawable.text_on);
 		}
 	}
 	public float speed;
 	public double speedMPH;
+	TextView speedStatus = (TextView) this.findViewById(R.id.speed);
+	ImageView textImg = (ImageView) this.findViewById(R.id.ivImage);
 	//SilentToNomal and NormalToSilent device Programatically
 	 public void silent(){
 		 final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
