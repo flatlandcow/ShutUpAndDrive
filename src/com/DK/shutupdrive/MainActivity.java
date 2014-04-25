@@ -1,7 +1,6 @@
 package com.DK.shutupdrive;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -28,11 +27,12 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		
 		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		
+		TextView speedStatus = (TextView) this.findViewById(R.id.speed);
+		ImageView textImg = (ImageView) this.findViewById(R.id.ivImage);
 		this.onLocationChanged(null);
-		MPH(speed);
 		if(speedMPH > 10 || speedMPH < 100){
 			silent();
 			speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting disabled.");
@@ -45,8 +45,6 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 	}
 	public float speed;
 	public double speedMPH;
-	TextView speedStatus = (TextView) this.findViewById(R.id.speed);
-	ImageView textImg = (ImageView) this.findViewById(R.id.ivImage);
 	//SilentToNomal and NormalToSilent device Programatically
 	 public void silent(){
 		 final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
@@ -106,6 +104,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			speed = 0;
 		} else{
 			speed = location.getSpeed();
+			MPH(speed);
 		}
 	}
 	@Override
