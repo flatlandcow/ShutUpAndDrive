@@ -1,6 +1,9 @@
 package com.DK.shutupdrive;
 
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements LocationListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +25,19 @@ public class MainActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		System.out.println("The speed is: " + Speed.speed(Speed.velocity));
+		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+		
+		this.onLocationChanged(null);
+		MPH(speed);
+		if(speedMPH > 10 || speedMPH < 100){
 		silent();
+		} else{
+			normal();
+		}
 	}
+	public float speed;
+	public double speedMPH;
 	//SilentToNomal and NormalToSilent device Programatically
 	 public void silent(){
 		 final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
@@ -74,6 +87,32 @@ public class MainActivity extends ActionBarActivity {
 					false);
 			return rootView;
 		}
+	}
+	public void MPH(float speed){
+		speedMPH = speed * 2.23694;
+	}
+	@Override
+	public void onLocationChanged(Location location) {
+		if( location == null){
+			speed = 0;
+		} else{
+			speed = location.getSpeed();
+		}
+	}
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
