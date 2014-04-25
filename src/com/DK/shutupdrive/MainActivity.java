@@ -22,7 +22,6 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
@@ -30,17 +29,17 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		
 		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		TextView speedStatus = (TextView) this.findViewById(R.id.speed);
-		ImageView textImg = (ImageView) this.findViewById(R.id.ivImage);
 		this.onLocationChanged(null);
-		if(speedMPH > 10 || speedMPH < 100){
+		//TextView speedStatus = (TextView) findViewById(R.id.speed);
+		//ImageView textImg = (ImageView) findViewById(R.id.ivImage);
+		if(speedMPH > 10 && speedMPH < 100){
 			silent();
-			speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting disabled.");
-			textImg.setImageResource(R.drawable.text_off);
+			//speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting disabled.");
+			//textImg.setImageResource(R.drawable.text_off);
 		} else{
 			normal();
-			speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting enabled.");
-			textImg.setImageResource(R.drawable.text_on);
+			//speedStatus.setText("Your current speed is: " + speedMPH + " mph, texting enabled.");
+			//textImg.setImageResource(R.drawable.text_on);
 		}
 	}
 	public float speed;
