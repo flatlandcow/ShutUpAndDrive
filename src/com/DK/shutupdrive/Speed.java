@@ -16,7 +16,7 @@ public class Speed extends Service implements LocationListener {
     Location location;
     double latitude;
     double longitude;
-    float velocity;
+    static float velocity;
     String provider;
 
     private static final long minDist = 0;
@@ -26,8 +26,8 @@ public class Speed extends Service implements LocationListener {
     @Override
     public void onCreate() {
         getLocation();
+        System.out.println("Hello");
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -45,7 +45,7 @@ public class Speed extends Service implements LocationListener {
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+    	System.out.println("status changed");
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Speed extends Service implements LocationListener {
         velocity = location.getSpeed();
         speed(velocity);
     }
-    public float speed(float velocity){
+    public static float speed(float velocity){
     	return velocity;
     }
 

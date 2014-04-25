@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		Speed.speed();
+		System.out.println("The speed is: " + Speed.speed(Speed.velocity));
 		silent();
 	}
 	//SilentToNomal and NormalToSilent device Programatically
