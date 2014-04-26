@@ -33,9 +33,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		this.onLocationChanged(null);
 	}
-	public float speed;
-	public double speedMPH;
-	
+	public float speed;	
 	//SilentToNomal and NormalToSilent device
 	 public void silent(){
 		 final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
