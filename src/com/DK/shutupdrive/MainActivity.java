@@ -18,7 +18,7 @@ import android.widget.Toast;
 //import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity implements LocationListener{
-//Author - Kyle Corry, Dylan Kiley, Brian Thronber
+//Author - Kyle Corry, Dylan Kiley, Brian Thornber
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
