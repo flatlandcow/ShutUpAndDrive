@@ -30,6 +30,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		Toast.makeText(getApplicationContext(), "Make sure to plug your phone in before driving! ... And don't text!", Toast.LENGTH_LONG).show();
 		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		this.onLocationChanged(null);
 	}
 	public float speed;
