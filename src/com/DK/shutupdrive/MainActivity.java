@@ -124,5 +124,4 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		// TODO Auto-generated method stub
 		
 	}
-
 }
