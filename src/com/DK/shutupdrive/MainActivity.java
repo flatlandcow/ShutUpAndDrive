@@ -6,6 +6,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -101,6 +102,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 				speedStatus.setText("Your current speed is: " + speed + " mph, texting disabled.");
 				textImg.setImageResource(R.drawable.text_off);
 			} else{
+				SystemClock.sleep(10000);
 				normal();
 				speedStatus.setText("Your current speed is: " + speed + " mph, texting enabled.");
 				textImg.setImageResource(R.drawable.text_on);
