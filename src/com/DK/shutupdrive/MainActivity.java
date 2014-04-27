@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity implements LocationListener{
 //Author - Kyle Corry, Dylan Kiley, Brian Thornber
+	int audioMode;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,6 +30,8 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 		Toast.makeText(getApplicationContext(), "Make sure to plug your phone in before driving! ... And don't text!", Toast.LENGTH_LONG).show();
+		final AudioManager current = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+		audioMode = current.getRingerMode();
 		LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
@@ -41,7 +44,11 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		//Silent Mode
 		mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);
 	 }
-	
+	public void vibrate(){
+		final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+		//vibrate mode
+		mode.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+	}
 	 public void normal(){
 		 final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 		//Normal Mode
@@ -102,8 +109,13 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 				speedStatus.setText("Your current speed is: " + speed + " mph, texting disabled.");
 				textImg.setImageResource(R.drawable.text_off);
 			} else{
-				SystemClock.sleep(10000);
-				normal();
+				if(audioMode == 1){
+					vibrate();
+				} else if(audioMode == 2){
+					normal();
+				} else{
+					silent();
+				}
 				speedStatus.setText("Your current speed is: " + speed + " mph, texting enabled.");
 				textImg.setImageResource(R.drawable.text_on);
 			}
