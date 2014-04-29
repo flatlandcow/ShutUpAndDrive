@@ -6,7 +6,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -36,6 +35,10 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		this.onLocationChanged(null);
+	}
+	@Override
+	protected void onPause(){
+		 android.os.Process.killProcess(android.os.Process.myPid());
 	}
 	public float speed;	
 	//SilentToNomal and NormalToSilent device
