@@ -18,7 +18,7 @@ import android.widget.Toast;
 //import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity implements LocationListener{
-//Author - Kyle Corry, Dylan Kiley, Brian Thornber
+//Author - Kyle Corry(programmer), Dylan Kiley(design, research and idea), Brian Thornber(design, research and idea)
 	int audioMode;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
