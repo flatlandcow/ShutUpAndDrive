@@ -110,7 +110,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 			speed = Math.round(speed);
 			if(speed > 10 && speed < 100){
 				silent();
-				speedStatus.setText("Your current speed is: " + speed + " mph, texting disabled.");
+				speedStatus.setText("Current speed: " + speed + " mph, texting disabled.");
 				textImg.setImageResource(R.drawable.text_off);
 			} else{
 				if(audioMode == 1){
@@ -120,7 +120,7 @@ public class MainActivity extends ActionBarActivity implements LocationListener{
 				} else{
 					silent();
 				}
-				speedStatus.setText("Your current speed is: " + speed + " mph, texting enabled.");
+				speedStatus.setText("Current speed: " + speed + " mph, texting enabled.");
 				textImg.setImageResource(R.drawable.text_on);
 			}
 		}
